@@ -1,0 +1,483 @@
+Program.Sub.ScreenSU.Start
+gui.Form1..create
+gui.Form1..caption("Email Maintenance")
+gui.Form1..size(8865,7035)
+gui.Form1..minx(0)
+gui.Form1..miny(0)
+gui.Form1..position(0,0)
+gui.Form1..event(unload,form1_unload)
+gui.Form1..alwaysontop(False)
+gui.Form1..fontname("Arial")
+gui.Form1..fontsize(8)
+gui.Form1..forecolor(0)
+gui.Form1..fontstyle(,,,,)
+gui.Form1..BackColor(-2147483633)
+gui.Form1..controlbox(True)
+gui.Form1..maxbutton(True)
+gui.Form1..minbutton(True)
+gui.Form1..mousepointer(0)
+gui.Form1..moveable(True)
+gui.Form1..sizeable(False)
+gui.Form1..ShowInTaskBar(True)
+gui.Form1..titlebar(True)
+gui.Form1.gsflexgrid1.create(gsflexgrid)
+gui.Form1.gsflexgrid1.FixedRows(0)
+gui.Form1.gsflexgrid1.FixedCols(0)
+gui.Form1.gsflexgrid1.visible(True)
+gui.Form1.gsflexgrid1.size(8385,3165)
+gui.Form1.gsflexgrid1.zorder(0)
+gui.Form1.gsflexgrid1.position(100,2500)
+gui.Form1.gsflexgrid1.enabled(True)
+gui.Form1.lblEmpNum.create(label,"Employee Number",True,1935,255,1,200,200,True,0,Arial,8,-2147483633,0)
+gui.Form1.lblEmpNum.defaultvalue("")
+gui.Form1.lblEmpNum.controlgroup(0)
+gui.Form1.lblEmpName.create(label,"Employee Name",True,1935,255,1,2300,200,True,0,Arial,8,-2147483633,0)
+gui.Form1.lblEmpName.defaultvalue("")
+gui.Form1.lblEmpName.controlgroup(0)
+gui.Form1.cmdBrowse.create(button)
+gui.Form1.cmdBrowse.caption("^")
+gui.Form1.cmdBrowse.visible(True)
+gui.Form1.cmdBrowse.size(400,300)
+gui.Form1.cmdBrowse.zorder(0)
+gui.Form1.cmdBrowse.position(4830,500)
+gui.Form1.cmdBrowse.enabled(True)
+gui.Form1.cmdBrowse.fontname("Arial")
+gui.Form1.cmdBrowse.fontsize(8)
+gui.Form1.cmdBrowse.event(click,cmdbrowse_click)
+gui.Form1.cmdBrowse.defaultvalue("")
+gui.Form1.cmdBrowse.controlgroup(0)
+gui.Form1.txtEmpNum.create(textbox,"",True,1665,300,0,200,500,True,0,Arial,8,-2147483643,1)
+gui.Form1.txtEmpNum.defaultvalue("")
+gui.Form1.txtEmpNum.controlgroup(0)
+gui.Form1.txtEmpName.create(textbox,"",True,2370,300,0,2300,500,True,0,Arial,8,-2147483643,1)
+gui.Form1.txtEmpName.defaultvalue("")
+gui.Form1.txtEmpName.controlgroup(0)
+gui.Form1.lblEmpEmail.create(label,"Employee's Email",True,1935,255,1,200,900,True,0,Arial,8,-2147483633,0)
+gui.Form1.lblEmpEmail.defaultvalue("")
+gui.Form1.lblEmpEmail.controlgroup(0)
+gui.Form1.txtEmployeesEmail.create(textbox,"",True,3330,300,0,200,1200,True,0,Arial,8,-2147483643,1)
+gui.Form1.txtEmployeesEmail.defaultvalue("")
+gui.Form1.txtEmployeesEmail.controlgroup(0)
+gui.Form1.lblSenderEmail.create(label,"Sender's Email",True,1935,255,1,3690,900,True,0,Arial,8,-2147483633,0)
+gui.Form1.lblSenderEmail.defaultvalue("")
+gui.Form1.lblSenderEmail.controlgroup(0)
+gui.Form1.cmdAdd.create(button)
+gui.Form1.cmdAdd.caption("Add")
+gui.Form1.cmdAdd.visible(True)
+gui.Form1.cmdAdd.size(855,375)
+gui.Form1.cmdAdd.zorder(0)
+gui.Form1.cmdAdd.position(200,1820)
+gui.Form1.cmdAdd.enabled(True)
+gui.Form1.cmdAdd.fontname("Arial")
+gui.Form1.cmdAdd.fontsize(8)
+gui.Form1.cmdAdd.event(click,cmdadd_click)
+gui.Form1.cmdAdd.defaultvalue("")
+gui.Form1.cmdAdd.controlgroup(0)
+gui.Form1.cmdRemove.create(button)
+gui.Form1.cmdRemove.caption("Remove")
+gui.Form1.cmdRemove.visible(True)
+gui.Form1.cmdRemove.size(855,375)
+gui.Form1.cmdRemove.zorder(0)
+gui.Form1.cmdRemove.position(1300,1815)
+gui.Form1.cmdRemove.enabled(True)
+gui.Form1.cmdRemove.fontname("Arial")
+gui.Form1.cmdRemove.fontsize(8)
+gui.Form1.cmdRemove.event(click,cmdremove_click)
+gui.Form1.cmdRemove.defaultvalue("")
+gui.Form1.cmdRemove.controlgroup(0)
+gui.Form1.cmdUpdate.create(button)
+gui.Form1.cmdUpdate.caption("Update")
+gui.Form1.cmdUpdate.visible(True)
+gui.Form1.cmdUpdate.size(855,375)
+gui.Form1.cmdUpdate.zorder(0)
+gui.Form1.cmdUpdate.position(200,5900)
+gui.Form1.cmdUpdate.enabled(True)
+gui.Form1.cmdUpdate.fontname("Arial")
+gui.Form1.cmdUpdate.fontsize(8)
+gui.Form1.cmdUpdate.event(click,cmdupdate_click)
+gui.Form1.cmdUpdate.defaultvalue("")
+gui.Form1.cmdUpdate.controlgroup(0)
+gui.Form1.txtSenderEmail.create(textbox,"",True,3330,300,0,3680,1190,True,0,Arial,8,-2147483643,1)
+gui.Form1.txtSenderEmail.defaultvalue("")
+gui.Form1.txtSenderEmail.controlgroup(0)
+
+
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Variable.UDT.uEmp.Define("EMPLOYEE",String,EMPLOYEE)
+Variable.UDT.uEmp.Define("NAME",String,NAME)
+Variable.uGlobal.uEmp.Declare("uEmp")
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+'date: 12/28/2015
+'coded by: WAW
+'This is a custom maintenance program that allows users to add/remove employees email addresses that are to receive an email from a separate credit hold program GCG_7393_CREDIT_HOLD
+
+F.ODBC.Connection!conx.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+
+F.Intrinsic.Control.CallSub(Buildstyle)
+
+Gui.Form1..Visible(True)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3495_Email_Maint.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Main.End
+
+program.sub.cmdbrowse_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdbrowse_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sret.Declare(String)
+V.Local.ssql.Declare(String)
+
+F.intrinsic.UI.Browser(51,"",V.Local.sret)
+
+'if the user selected an emplyee populate the textboxes with the data
+F.Intrinsic.Control.If(V.Local.sret,<>,"***CANCEL***")
+	F.Intrinsic.String.Split(V.Local.sret,"*!*",V.Local.sret)
+	Gui.Form1.txtEmpName.Text(V.Local.sret(1))
+	Gui.Form1.txtEmpNum.Text(V.Local.sret(0))
+
+	'get the employee's email from the employee master
+	F.intrinsic.string.Build("Select EMAIL_ADDR from EMPLOYEE_MSTR where EMPLOYEE = '{0}'",V.Local.sret(0).Trim,V.Local.ssql)
+	F.ODBC.connection!conx.OpenRecordsetRO("rst",V.Local.ssql)
+	F.Intrinsic.Control.If(V.ODBC.conx!rst.EOF,<>,True)
+		Gui.Form1.txtEmployeesEmail.Text(V.ODBC.conx!rst.FieldValTrim!EMAIL_ADDR)
+	F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.Else
+	'informt he user no employee was selected and exit the sub
+	F.Intrinsic.UI.Msgbox("No employee was selected")
+	F.Intrinsic.Control.exitsub
+F.Intrinsic.Control.EndIf
+
+'close connection
+F.ODBC.conx!rst.Close
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdbrowse_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3495_Email_Maint.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdbrowse_click.end
+
+program.sub.cmdadd_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdadd_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.irow.Declare(Long)
+
+'variable to hold the number of rows in the flexgrid
+V.Local.irow.Set(V.Screen.Form1!gsflexgrid1.Rows)
+
+'subtract 1 row
+F.Intrinsic.Math.Sub(V.Local.irow,1,V.Local.irow)
+
+'check to see if the employee textboxes are empty
+F.Intrinsic.Control.If(V.Screen.Form1!TXTEmpName.text,=,"")
+	F.Intrinsic.UI.Msgbox("Please enter an employee's name")
+	F.Intrinsic.Control.exitsub
+F.Intrinsic.Control.ElseIf(V.Screen.Form1!txtEmpNum.Text,=,"")
+	F.Intrinsic.UI.Msgbox("Please enter an employee's number")
+	F.Intrinsic.Control.exitsub
+F.intrinsic.Control.Elseif(V.Screen.Form1!txtEmployeesEmail.Text,=,"")
+	F.Intrinsic.UI.Msgbox("Please enter an employee's email address")
+	F.Intrinsic.Control.exitsub
+F.Intrinsic.Control.ElseIf(V.Screen.Form1!txtSenderEmail.Text,=,"")
+	F.Intrinsic.UI.Msgbox("Please enter an sender's email address")
+	F.Intrinsic.Control.exitsub
+F.Intrinsic.Control.EndIf
+
+'apply the new style and increase the row count
+F.Intrinsic.Math.Add(V.Local.irow,2,V.Local.irow)
+
+'F.Intrinsic.Math.Add(V.Local.irow,1,V.Local.irow)
+Gui.Form1.gsflexgrid1.Rows(V.Local.irow)
+
+'make the grid invisible
+Gui.Form1.gsflexgrid1.Visible(false)
+
+F.Intrinsic.Math.Sub(V.Local.irow,2,V.Local.irow)
+
+'put the new email information in the flexgrid
+Gui.Form1.gsflexgrid1.TextMatrix(0,V.Local.irow,V.Screen.Form1!txtEmpNum.Text)
+Gui.Form1.gsflexgrid1.TextMatrix(1,V.Local.irow,V.Screen.Form1!txtEmpName.Text)
+Gui.Form1.gsflexgrid1.TextMatrix(2,V.Local.irow,V.Screen.Form1!txtEmployeesEmail.Text)
+Gui.Form1.gsflexgrid1.TextMatrix(3,V.Local.irow,V.Screen.Form1!txtSenderEmail.Text)
+
+Gui.Form1.gsflexgrid1.ApplyStyle(V.Local.irow,1)
+
+'clear the textboxes and make the flexgrid visible
+Gui.Form1.txtEmployeesEmail.Text("")
+Gui.Form1.txtEmpName.Text("")
+Gui.Form1.txtEmpNum.Text("")
+Gui.Form1.txtSenderEmail.Text("")
+Gui.Form1.gsflexgrid1.Visible(true)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdadd_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3495_Email_Maint.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdadd_click.end
+
+program.sub.cmdremove_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdremove_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.irow.Declare(Long)
+V.Local.icount.Declare(Long)
+V.Local.scheck.Declare(String)
+V.Local.sret.Declare(String)
+V.Local.semp.Declare(String)
+V.Local.sname.Declare(String)
+
+Gui.Form1.gsflexgrid1.visible(false)
+
+'set the variable with the number of rows in the flexgrid
+V.Local.irow.Set(V.Screen.Form1!gsflexgrid1.Rows)
+
+'subtract the header and bottom blank row from the count
+F.Intrinsic.Math.Sub(V.Local.irow,1,V.Local.irow)
+
+'F.Intrinsic.Control.If(V.uGlobal.uEmp.UBound,<>,-1)
+'
+'	V.uGlobal.uEmp.Redim(-1,-1)
+'F.Intrinsic.Control.EndIf
+'loop through the flexgrid
+F.Intrinsic.Control.For(V.Local.icount,V.Local.irow,1,-1)
+	'see if the checkbox is checked
+	Gui.Form1.gsflexgrid1.GetTextMatrix(4,V.Local.icount,V.Local.scheck)
+
+	'if it is equal to 1 delete it
+	F.Intrinsic.Control.If(V.Local.scheck,=,1)
+		Gui.Form1.gsflexgrid1.GetTextMatrix(0,V.Local.icount,V.Local.semp)
+		Gui.Form1.gsflexgrid1.GetTextMatrix(1,V.Local.icount,V.Local.sname)
+		F.Intrinsic.String.Build("{0}*!*{1}",V.Local.semp,V.Local.sname,V.Local.semp)
+
+		F.Intrinsic.Variable.LoadUDTFromString(V.uGlobal.uEmp,"EMPLOYEE*!*NAME",V.Local.semp,"!@!","*!*",True,1000)
+
+		'delete the row	
+		Gui.Form1.gsflexgrid1.RemoveStyle(V.Local.icount)
+		Gui.Form1.gsflexgrid1.DeleteRow(V.Local.icount)
+	F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.Next(V.Local.icount)
+
+Gui.Form1.gsflexgrid1.Visible(true)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdremove_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3495_Email_Maint.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdremove_click.end
+
+program.sub.cmdupdate_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdupdate_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.ssql.Declare(String)
+V.Local.irows.Declare(Long)
+V.Local.icount.Declare(Long)
+V.Local.sret.Declare(String)
+V.Local.ssql2.Declare(String)
+V.Local.icount2.Declare(Long)
+V.Local.idelete.Declare(Long)
+
+V.Local.idelete.Set(0)
+
+F.Intrinsic.Control.For(V.Local.idelete,V.uGlobal.uEmp.LBound,V.uGlobal.uEmp.UBound,1)
+	F.Intrinsic.string.Build("Delete from GCG_3495_Email_Maint where EMPLOYEE = '{0}' and NAME = '{1}'",V.uGlobal.uEmp(v.Local.idelete)!EMPLOYEE,V.uGlobal.uEmp(v.Local.idelete)!NAME,V.Local.ssql)
+	F.ODBC.Connection!conx.OpenLocalRecordsetRW("rst",V.Local.ssql)
+	F.ODBC.conx!rst.Close
+F.Intrinsic.Control.next(V.Local.idelete)
+
+'get the number of rows
+V.Local.irows.Set(V.Screen.Form1!gsflexgrid1.Rows)
+
+F.Intrinsic.Math.Sub(V.Local.irows,2,V.Local.irows)
+
+F.Intrinsic.Control.For(V.Local.icount,1,V.Local.irows,1)
+	Gui.Form1.gsflexgrid1.ReadRow(V.Local.icount,V.Local.sret)
+	F.Intrinsic.String.Split(V.Local.sret,"*!*",V.Local.sret)
+	'see if there is already data in the custom table for that employee if so update the table otherwise add a new record
+	F.Intrinsic.String.Build("Select * from GCG_3495_Email_Maint where EMPLOYEE = '{0}' and NAME = '{1}'",V.Local.sret(0),V.Local.sret(1),V.Local.ssql)
+	F.ODBC.Connection!conx.OpenLocalRecordsetRW("rst",V.Local.ssql)
+	F.Intrinsic.Control.If(V.ODBC.conx!rst.EOF,=,False)
+		'update the record found
+		F.Intrinsic.String.Build("update GCG_3495_Email_Maint set EMAIL_ADDR = '{0}', SENDER_EMAIL = '{1}' where EMPLOYEE = '{2}' and NAME = '{3}'",V.Local.sret(2),V.local.sret(3),V.Local.sret(0),V.Local.sret(1),V.Local.ssql2)
+		F.ODBC.Connection!conx.OpenRecordsetRW("rstUpdate",V.Local.ssql2)
+		F.ODBC.Conx!rstupdate.Close
+	F.Intrinsic.Control.Else
+		'add a new record
+		F.ODBC.Conx!rst.AddNew
+		F.ODBC.conx!rst.Set!EMPLOYEE(V.Local.sret(0))
+		F.ODBC.conx!rst.Set!NAME(V.Local.sret(1))
+		F.ODBC.Conx!rst.set!EMAIL_ADDR(V.Local.sret(2))
+		F.ODBC.conx!rst.Set!SENDER_EMAIL(V.local.sret(3))
+		F.ODBC.conx!rst.Update
+	F.Intrinsic.Control.EndIf
+	F.ODBC.Conx!rst.Close
+
+F.Intrinsic.Control.Next(V.Local.icount)
+
+
+F.Intrinsic.Control.CallSub(Form1_unload)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdupdate_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3495_Email_Maint.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdupdate_click.end
+
+program.sub.form1_unload.start
+F.Intrinsic.Control.SetErrorHandler("form1_unload_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+Gui.Form1..Visible(false)
+
+F.ODBC.Connection!conx.Close
+F.Intrinsic.Control.End
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("form1_unload_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3495_Email_Maint.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.End
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.form1_unload.end
+
+Program.Sub.Buildstyle.Start
+F.Intrinsic.Control.SetErrorHandler("Buildstyle_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+'set the rows and columns
+Gui.Form1.gsflexgrid1.cols(5)
+Gui.Form1.gsflexgrid1.Rows(1)
+'Gui.Form1.gsflexgrid1.Rows(2)
+'Gui.Form1.gsflexgrid1.FixedRows(1)
+
+'set the title row
+Gui.Form1.gsflexgrid1.TextMatrix(0,0,"Employee's Num.")
+Gui.Form1.gsflexgrid1.TextMatrix(1,0,"Employee's Name")
+Gui.Form1.gsflexgrid1.TextMatrix(2,0,"Employee's Email")
+Gui.Form1.gsflexgrid1.TextMatrix(3,0,"Sender's Email")
+Gui.Form1.gsflexgrid1.TextMatrix(4,0,"Remove?")
+
+'set the buildstyle
+Gui.Form1.gsflexgrid1.BuildStyle(1,0,"Type","Locked",True)
+Gui.Form1.gsflexgrid1.BuildStyle(1,0,"Format","Alignment",2)
+Gui.Form1.gsflexgrid1.BuildStyle(1,1,"Type","Locked",True)
+Gui.Form1.gsflexgrid1.BuildStyle(1,1,"Format","Alignment",2)
+Gui.Form1.gsflexgrid1.BuildStyle(1,2,"Type","Locked",True)
+Gui.Form1.gsflexgrid1.BuildStyle(1,2,"Format","Alignment",2)
+Gui.Form1.gsflexgrid1.BuildStyle(1,3,"Type","Locked",True)
+Gui.Form1.gsflexgrid1.BuildStyle(1,3,"Format","Alignment",2)
+
+Gui.Form1.gsflexgrid1.BuildStyle(1,4,"Type","Checkbox","")
+Gui.Form1.gsflexgrid1.BuildStyle(1,4,"Format","Alignment",2)
+
+'set the column percentages and apply the style	
+Gui.Form1.gsflexgrid1.SetColumnPercentages(".15:.25:.25:.25:.10")
+Gui.Form1.gsflexgrid1.ApplyStyle(1,1)
+
+'call the populate grid subroutine	
+F.Intrinsic.Control.CallSub(Populategrid)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Buildstyle_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3495_Email_Maint.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Buildstyle.End
+
+Program.Sub.PopulateGrid.Start
+F.Intrinsic.Control.SetErrorHandler("PopulateGrid_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.ssql.Declare(String)
+
+'load the grid with information from custom SQL table
+F.Intrinsic.String.Build("Select * from GCG_3495_Email_Maint where EMPLOYEE <> '{0}'","",V.Local.ssql)
+F.odbc.Connection!conx.OpenRecordsetRO("rst",V.Local.ssql)
+F.Intrinsic.Control.If(V.ODBC.conx!rst.EOF,<>,True)
+	Gui.Form1.gsflexgrid1.LoadRecordset("conx!rst",1)
+	
+F.Intrinsic.Control.EndIf
+
+'close connection
+F.ODBC.conx!rst.Close
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("PopulateGrid_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3495_Email_Maint.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.PopulateGrid.End
+
+Program.Sub.Comments.Start
+${$0$}$GCG_7393_Email_Maint$}$WAW$}$12/28/2015
+Program.Sub.Comments.End
+
